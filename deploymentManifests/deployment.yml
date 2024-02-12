@@ -5,6 +5,7 @@ metadata:
   labels:
     app: sparrow-api
   name: sparrow-api
+  namespace: sparrow-test
 spec:
   replicas: 1
   selector:
@@ -74,42 +75,42 @@ spec:
               secretKeyRef:
                 name: sparrow-api-secret
                 key: REFRESH_TOKEN_EXPIRATION_TIME
-          - name:  REFRESH_TOKEN_MAX_LIMIT
+          - name: REFRESH_TOKEN_MAX_LIMIT
             valueFrom:
               secretKeyRef:
                 name: sparrow-api-secret
                 key:  REFRESH_TOKEN_MAX_LIMIT
-          - name:  SENDER_EMAIL
+          - name: SENDER_EMAIL
             valueFrom:
               secretKeyRef:
                 name: sparrow-api-secret
                 key:  SENDER_EMAIL
-          - name:  SENDER_PASSWORD
+          - name: SENDER_PASSWORD
             valueFrom:
               secretKeyRef:
                 name: sparrow-api-secret
                 key:  SENDER_PASSWORD
-          - name:  LOGIN_REDIRECT_URL
+          - name: LOGIN_REDIRECT_URL
             valueFrom:
               secretKeyRef:
                 name: sparrow-api-secret
                 key:  LOGIN_REDIRECT_URL
-          - name:  GOOGLE_APP_URL
+          - name: GOOGLE_APP_URL
             valueFrom:
               secretKeyRef:
                 name: sparrow-api-secret
                 key:  GOOGLE_APP_URL
-          - name:  GOOGLE_ACCESS_TYPE
+          - name: GOOGLE_ACCESS_TYPE
             valueFrom:
               secretKeyRef:
                 name: sparrow-api-secret
                 key:  GOOGLE_ACCESS_TYPE
-          - name:  GOOGLE_CLIENT_ID
+          - name: GOOGLE_CLIENT_ID
             valueFrom:
               secretKeyRef:
                 name: sparrow-api-secret
                 key:  GOOGLE_CLIENT_ID
-          - name:  GOOGLE_CLIENT_SECRET
+          - name: GOOGLE_CLIENT_SECRET
             valueFrom:
               secretKeyRef:
                 name: sparrow-api-secret
@@ -119,7 +120,51 @@ spec:
               secretKeyRef:
                 name: sparrow-api-secret
                 key: KAFKA_BROKER
-                                                                             
+          - name: REFRESH_TOKEN_MAX_LIMIT
+            valueFrom:
+              secretKeyRef:
+                name: sparrow-api-secret
+                key:  REFRESH_TOKEN_MAX_LIMIT
+          - name: APP_UPDATE_AVAILABLE
+            valueFrom:
+              secretKeyRef:
+                name: sparrow-api-secret
+                key:  APP_UPDATE_AVAILABLE
+          - name: APP_VERSION
+            valueFrom:
+              secretKeyRef:
+                name: sparrow-api-secret
+                key:  APP_VERSION   
+          - name: WINDOWS_APP_SIGNATURE
+            valueFrom:
+              secretKeyRef:
+                name: sparrow-api-secret
+                key:  WINDOWS_APP_SIGNATURE                                                                                         
+          - name: WINDOWS_APP_URL
+            valueFrom:
+              secretKeyRef:
+                name: sparrow-api-secret
+                key:  WINDOWS_APP_URL        
+          - name: MAC_APPLE_SILICON_APP_SIGNATURE
+            valueFrom:
+              secretKeyRef:
+                name: sparrow-api-secret
+                key:  MAC_APPLE_SILICON_APP_SIGNATURE        
+          - name: MAC_APPLE_SILICON_APP_URL
+            valueFrom:
+              secretKeyRef:
+                name: sparrow-api-secret
+                key:  MAC_APPLE_SILICON_APP_URL      
+          - name: MAC_INTEL_APP_SIGNATURE
+            valueFrom:
+              secretKeyRef:
+                name: sparrow-api-secret
+                key:  MAC_INTEL_APP_SIGNATURE       
+          - name: MAC_INTEL_APP_URL
+            valueFrom:
+              secretKeyRef:
+                name: sparrow-api-secret
+                key:  MAC_INTEL_APP_URL       
 ---
 
 apiVersion: v1
@@ -128,6 +173,7 @@ metadata:
   name: sparrow-api
   labels:
     run: sparrow-api
+  namespace: sparrow-test
 spec:
   type: ClusterIP
   selector:
