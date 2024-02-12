@@ -30,6 +30,7 @@ jobs:
          - name: Apply Kubernetes Secret
            run: |
               cat <<EOF | kubectl apply -n sparrow-test -f -
+              apiVersion: v1
               kind: Secret
               metadata:
                 name: sparrow-api-secret
