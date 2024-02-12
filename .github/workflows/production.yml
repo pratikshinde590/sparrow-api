@@ -30,11 +30,11 @@ jobs:
          - name: Apply Kubernetes Secret
            run: |
               cat <<EOF | kubectl apply -n sparrow-test -f -
-              apiVersion: v1
               kind: Secret
               metadata:
-              name: sparrow-api-secret
+                name: sparrow-api-secret
               stringData:
-              WINDOWS_APP_SIGNATURE: "${{ secrets.WINDOWS_APP_SIGNATURE }}"
-              WINDOWS_APP_URL: ""
+                WINDOWS_APP_SIGNATURE: "${{ secrets.WINDOWS_APP_SIGNATURE }}"
+                WINDOWS_APP_URL: ""
               EOF
+
