@@ -5,22 +5,7 @@ on:
       - main
 
 jobs:
-   build:
-      runs-on: ubuntu-latest
-      steps:
-         - uses: actions/checkout@master
-
-         - uses: Azure/docker-login@v1
-           with:
-              login-server: sparrowprod.azurecr.io
-              username: ${{ secrets.REGISTRY_USERNAME }}
-              password: ${{ secrets.REGISTRY_PASSWORD }}
-
-         - run: |
-              docker build . -t sparrowprod.azurecr.io/sparrow-api:${{ github.run_number }}
-              docker push sparrowprod.azurecr.io/sparrow-api:${{ github.run_number }}
    deploy:
-      needs: build
       runs-on: ubuntu-latest
       steps:
          - uses: actions/checkout@master
@@ -42,3 +27,14 @@ jobs:
               namespace: ${{ secrets.NAMESPACE }}
               manifests: |
                  ./deploymentManifests/deployment.yml
+         - name: Apply Kubernetes Secret
+           run: |
+              cat <<EOF | kubectl apply -n sparrow-test -f -
+              apiVersion: v1
+              kind: Secret
+              metadata:
+              name: sparrow-api-secret
+              stringData:
+              WINDOWS_APP_SIGNATURE: "${{ secrets.WINDOWS_APP_SIGNATURE }}"
+              WINDOWS_APP_URL: ""
+              EOF
