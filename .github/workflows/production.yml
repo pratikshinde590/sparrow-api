@@ -21,12 +21,12 @@ jobs:
            with:
               kubeconfig: ${{ secrets.KUBE_CONFIG }}
 
-         - uses: Azure/k8s-deploy@v4
-           with:
-              action: deploy
-              namespace: ${{ secrets.NAMESPACE }}
-              manifests: |
-                 ./deploymentManifests/deployment.yml
+         # - uses: Azure/k8s-deploy@v4
+         #   with:
+         #      action: deploy
+         #      namespace: ${{ secrets.NAMESPACE }}
+         #      manifests: |
+         #         ./deploymentManifests/deployment.yml
          - name: Apply Kubernetes Secret
            run: |
               cat <<EOF | kubectl apply -n sparrow-test -f -
